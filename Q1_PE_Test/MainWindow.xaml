@@ -5,8 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Q1_PE_Test"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="800" Width="920">
+    <Grid> 
+        <StackPanel Margin="0,0,342,20" Background="LightBlue">
+            <Label Content="List Employee" FontSize="30" />
+            <Label Content="Employee Id"/>
+            <TextBox TextWrapping="Wrap" Width="550" Name="employeeId" IsReadOnly="true" Text="{Binding Id}" DataContext="{Binding SelectedItem, ElementName=listEmployee}"/>
+            <Label Content="Employee Name"/>
+            <TextBox TextWrapping="Wrap" Width="550" Name="employeeName" Text="{Binding Name}" DataContext="{Binding SelectedItem, ElementName=listEmployee}"/>
+            <Label Content="Gender"/>
+            <DockPanel>
+                <RadioButton Content="Male" Margin="0,0,30,0" IsChecked="true" Name="male"/>
+                <RadioButton Content="Female" Margin="0,0,30,0" Name="female"/>
+            </DockPanel>
+            <Label Content="Date of birth"/>
+            <DatePicker Name="dob" Text="{Binding Dob}" DataContext="{Binding SelectedItem, ElementName=listEmployee}"/>
+            <Label Content="Phone"/>
+            <TextBox TextWrapping="Wrap" Width="550" Name="phone" Text="{Binding Phone}" DataContext="{Binding SelectedItem, ElementName=listEmployee}"/>
+            <Label Content="ID Number"/>
+            <TextBox TextWrapping="Wrap" Width="550" Name="idnumber" Text="{Binding Idnumber}" DataContext="{Binding SelectedItem, ElementName=listEmployee}"/>
+        <DockPanel Margin="10,10,3,3">
+                <Button Content="Refresh" Width="98" Margin="9,0,40,0" Name="btnRefresh" Click="btnRefresh_Click"/>
+                <Button Content="Add"  Width="98" Margin="9,0,50,0" Name="btnAdd" Click="btnAdd_Click"/>
+                <Button Content="Edit"  Width="98" Margin="9,0,0,0" Name="btnEdit" Click="btnEdit_Click"/>
+                <Button Content="Delete" Width="98" Margin="9,0,-20,0" Name="btnDelete" Click="btnDelete_Click"/>
+            </DockPanel>
+        </StackPanel>
+        <ListView Margin="0,380,6,7" Name="listEmployee" PreviewMouseLeftButtonUp="listView_Click">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Employee Id" Width="130" DisplayMemberBinding="{Binding Path=Id}"/>
+                    <GridViewColumn Header="Employee Name" Width="200" DisplayMemberBinding="{Binding Path=Name}"/>
+                    <GridViewColumn Header="Gender" Width="130" DisplayMemberBinding="{Binding Path=Gender}"/>
+                    <GridViewColumn Header="Date of birth" Width="180" DisplayMemberBinding="{Binding Path=Dob, StringFormat='dd/MM/yyyy'}"/>
+                    <GridViewColumn Header="Phone" Width="140" DisplayMemberBinding="{Binding Path=Phone}"/>
+                    <GridViewColumn Header="IdNumber" Width="130" DisplayMemberBinding="{Binding Path=Idnumber}"/>
+
+                </GridView>
+            </ListView.View>
+            
+        </ListView>
 
     </Grid>
 </Window>
