@@ -23,6 +23,7 @@ namespace Q1_PE_Test
     public partial class MainWindow : Window
     {
         private readonly PRN221_Spr22Context _context;
+        Employee originalContext;
 
         public MainWindow(PRN221_Spr22Context context)
         {
@@ -30,15 +31,23 @@ namespace Q1_PE_Test
             _context = context;
             LoadData();
         }
-        public void LoadData()
+
+
+        private void LoadData()
         {
+            UpdateGridView();
+        }
+        private void UpdateGridView()
+        {
+            listEmployee.ItemsSource = null;
             listEmployee.ItemsSource = _context.Employees.ToList();
         }
         public Employee GetEmployeeObject()
         {
+            Employee employee = null;
             try
             {
-                return new Employee
+                employee = new Employee
                 {
                     Id = string.IsNullOrEmpty(employeeId.Text) ? 0 : int.Parse(employeeId.Text),
                     Name = employeeName.Text,
@@ -54,7 +63,7 @@ namespace Q1_PE_Test
             {
                 MessageBox.Show("Cannot get Employee", "Get Employee");
             }
-            return null;
+            return employee;
         }
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
@@ -68,40 +77,34 @@ namespace Q1_PE_Test
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            try
+            Employee employee = GetEmployeeObject();
+            if(employee != null)
             {
-                var employee = GetEmployeeObject();
-                if (employee != null)
-                {
-                    employee.Id = 0;
-                    _context.Employees.Add(employee);
-                    _context.SaveChanges();
-                    LoadData();
-                    MessageBox.Show("Add employee success", "Add employee");
+                employee.Id = 0;
+                _context.Employees.Add(employee);
+                _context.SaveChanges();
+                LoadData();
+                MessageBox.Show($"{employee.Name} insert succesfully", "Insert Employee");
+            }
 
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Insert employee fail", "Add Employee");
-            }
+
         }
 
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var employee = GetEmployeeObject();
-                if (employee != null)
+                var employee1 = GetEmployeeObject();
+                if (employee1 != null)
                 {
-                    var oldEmployee = _context.Employees.FirstOrDefault(x => x.Id == employee.Id);
+                    var oldEmployee = _context.Employees.FirstOrDefault(x => x.Id == employee1.Id);
                     if (oldEmployee != null)
                     {
-                        oldEmployee.Dob = employee.Dob;
-                        oldEmployee.Phone = employee.Phone;
-                        oldEmployee.Name = employee.Name;
-                        oldEmployee.Idnumber = employee.Idnumber;
-                        oldEmployee.Gender = employee.Gender;
+                        oldEmployee.Dob = employee1.Dob;
+                        oldEmployee.Phone = employee1.Phone;
+                        oldEmployee.Name = employee1.Name;
+                        oldEmployee.Idnumber = employee1.Idnumber;
+                        oldEmployee.Gender = employee1.Gender;
 
                         _context.Employees.Update(oldEmployee);
                         _context.SaveChanges();
@@ -119,8 +122,15 @@ namespace Q1_PE_Test
         private void listView_Click(object sender, RoutedEventArgs e)
         {
             var item = (sender as ListView).SelectedItem;
+       //     originalContext = (Employee)listEmployee.SelectedItem;
+
             if (item != null)
             {
+                if (item == originalContext)
+                {
+                    originalContext = null;
+                }
+                //  originalContext = (Employee)item;
                 var gender = ((Employee)item).Gender;
                 if (!string.IsNullOrEmpty(gender))
                 {
@@ -147,7 +157,7 @@ namespace Q1_PE_Test
                     var oldEmployee = _context.Employees.FirstOrDefault(x => x.Id == employee.Id);
                     if (oldEmployee != null)
                     {
-                       _context.Employees.Remove(oldEmployee);
+                        _context.Employees.Remove(oldEmployee);
                         _context.SaveChanges();
                         LoadData();
                         MessageBox.Show("Delete employee success", "Delete employee");
