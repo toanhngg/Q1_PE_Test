@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Q1_PE_Test", "Q1_PE_Test\Q1_PE_Test.csproj", "{9A43BC25-7BB7-40D6-AEB2-9357B0766A21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Q1_PE_Test", "Q1_PE_Test\Q1_PE_Test.csproj", "{9A43BC25-7BB7-40D6-AEB2-9357B0766A21}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Q1_PE_SP23_01", "Q1_PE_SP23_01\Q1_PE_SP23_01.csproj", "{6C80427B-0EAD-4089-AD1E-1AF3996B51E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9A43BC25-7BB7-40D6-AEB2-9357B0766A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A43BC25-7BB7-40D6-AEB2-9357B0766A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A43BC25-7BB7-40D6-AEB2-9357B0766A21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C80427B-0EAD-4089-AD1E-1AF3996B51E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C80427B-0EAD-4089-AD1E-1AF3996B51E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C80427B-0EAD-4089-AD1E-1AF3996B51E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C80427B-0EAD-4089-AD1E-1AF3996B51E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

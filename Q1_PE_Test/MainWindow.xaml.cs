@@ -41,6 +41,9 @@ namespace Q1_PE_Test
         {
             listEmployee.ItemsSource = null;
             listEmployee.ItemsSource = _context.Employees.ToList();
+           
+
+
         }
         public Employee GetEmployeeObject()
         {
@@ -82,7 +85,7 @@ namespace Q1_PE_Test
             {
                 employee.Id = 0;
                 _context.Employees.Add(employee);
-                _context.SaveChanges();
+             //   _context.SaveChanges();
                 LoadData();
                 MessageBox.Show($"{employee.Name} insert succesfully", "Insert Employee");
             }
